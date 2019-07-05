@@ -3,6 +3,7 @@ maintainer: "Romain Beauxis <toots@rastageeks.org>"
 authors: "The Savonet Team <savonet-users@lists.sourceforge.net>"
 homepage: "https://github.com/savonet/ocaml-lo"
 build: [
+  ["./bootstrap"] {pinned}
   ["./configure" "--prefix" prefix] {os != "macos"}
   [
     "./configure"
@@ -12,17 +13,20 @@ build: [
     "--prefix"
     prefix
   ] {os = "macos"}
+  [make "clean"] {pinned}
   [make]
 ]
 install: [
   [make "install"]
 ]
-depends: ["ocaml" "ocamlfind" {build}]
+depends: [
+  "ocaml" 
+  "ocamlfind" {build}
+]
 depexts: [
   ["liblo-dev"] {os-distribution = "ubuntu"}
   ["liblo-dev"] {os-distribution = "debian"}
   ["liblo"] {os = "macos" & os-distribution = "homebrew"}
-  ["liblo-dev"] {os-distribution = "alpine"}
   ["liblo"] {os-distribution = "arch"}
   ["liblo-devel"] {os-distribution = "centos"}
   ["liblo-devel"] {os-distribution = "fedora"}
@@ -33,6 +37,9 @@ dev-repo: "git+https://github.com/savonet/ocaml-lo.git"
 synopsis:
   "Bindings for the lo library which provides functions for communicating with input controls using the OSC protocol"
 url {
-  src: "https://github.com/savonet/ocaml-lo/releases/download/0.1.2/ocaml-lo-0.1.2.tar.gz"
-  checksum: "md5=0f6014cfdac315c2c79fd2968b84a3bb"
+  src: "https://github.com/savonet/ocaml-lo/archive/0.1.2.tar.gz"
+  checksum: [
+    "md5=892d20138deeef3922eff872b394e21e"
+    "sha512=e97b431737680b5ed6196b5f875f5380460edb8d0f3b8ee7e2e66289e7909cf5dad295b56804d13e10ac2d0d146a519341d1c8243ea44cc7a62018abd915496e"
+  ]
 }
